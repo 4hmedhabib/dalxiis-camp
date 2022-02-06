@@ -41,6 +41,8 @@ model Campground {
 
 model Geometry {
   id           Int          @id @default(autoincrement())
+  lng          Int
+  lat          Int
   campground   Campground   @relation("CampgroundToGeometry", fields: [campgroundId], references: [id])
   campgroundId Int          @unique
   type         GeometryType

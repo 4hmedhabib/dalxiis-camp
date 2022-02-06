@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import cities from "./cities";
 import { descriptors, places } from "./seedHelper";
+import images from "./images";
 
 const prisma = new PrismaClient();
 
@@ -35,17 +36,24 @@ const seedDB = async () => {
         description:
           "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam ab corporis, adipisci ratione error at eius, odio libero tenetur facilis aliquam exercitationem dolorum delectus quod repellendus quia placeat magni explicabo!",
         price: price,
-       geometry: {
-           create: {
-               type: "Point"
-           }
-       }
+        geometry: {
+          create: {
+            type: "Point",
+            lng: cities[random1000].longitude,
+            lat: cities[random1000].latitude,
+          },
+        },
         images: {
-            create: {
-                url: images[i]
-            }
-        }
+          create: {
+            url: images[i].url,
+          },
+        },
       },
     });
   }
 };
+
+seedDB().then((data) => {
+  console.log("============DATA ARE SAVED================");
+  console.log(data);
+});
