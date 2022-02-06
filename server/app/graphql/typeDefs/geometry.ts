@@ -6,9 +6,9 @@ const geometryDefs = gql`
   }
 
   type Geometry {
+    Id: Int
     lng: Float
     lat: Float
-    campground: Campground
     campgroundId: Int
     type: GeoType
   }

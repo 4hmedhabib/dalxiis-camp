@@ -1,7 +1,21 @@
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
+
 const campgroundRes = {
   Query: {
-    campgrounds: () => {
-      console.log("all Campgrounds are running");
+    campgrounds: async (_: any, {}) => {
+      const campgrounds = await prisma.campground.findMany({
+        include: {
+          geometry: true,
+          author: true,
+          images: true,
+          reviews: true,
+        },
+      });
+
+      console.log(campgrounds);
+      return campgrounds;
     },
   },
 };
