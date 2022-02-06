@@ -13,12 +13,17 @@ const sample = (arr: string[]): string => {
 };
 
 const seedDB = async () => {
+  await prisma.campground.deleteMany({});
   const user = await prisma.user.findFirst();
 
   for (let i = 0; i < 10; i++) {
     const random1000: number = Math.floor(Math.random() * 1000);
     const price: number = Math.floor(Math.random() * 20 + 10);
     console.log({ random1000, price });
+    console.log({
+      lat: cities[random1000].latitude,
+      lng: cities[random1000].longitude,
+    });
 
     await prisma.campground.create({
       data: {
@@ -47,5 +52,4 @@ const seedDB = async () => {
 
 seedDB().then((data) => {
   console.log("============DATA ARE SAVED================");
-  console.log(data);
 });
