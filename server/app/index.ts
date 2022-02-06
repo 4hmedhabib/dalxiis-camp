@@ -1,3 +1,4 @@
+import env from "dotenv";
 import express from "express";
 import { ApolloServer } from "apollo-server-express";
 import http from "http";
@@ -5,8 +6,10 @@ import http from "http";
 import { resolvers, typeDefs } from "./graphql";
 import { ApolloServerPluginDrainHttpServer } from "apollo-server-core";
 
+env.config();
+
 const appGetStart = async () => {
-  const port = process.env.PORT;
+  const PORT = process.env.PORT;
   const app = express();
 
   // middlewares
@@ -26,8 +29,8 @@ const appGetStart = async () => {
 
   await server.start();
   server.applyMiddleware({ app });
-  httpServer.listen(port, () => {
-    console.log(`@ SERVER RUNNING PORT : ${port}`);
+  httpServer.listen(PORT, () => {
+    console.log(`@ SERVER RUNNING PORT : ${PORT}`);
   });
 };
 
