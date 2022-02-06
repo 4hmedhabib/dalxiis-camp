@@ -1,6 +1,5 @@
-const resolvers = {
-  Query: {},
-  Mutation: {},
-};
+import merge from "lodash/merge";
 
-export default resolvers;
+import campground from "./campground";
+
+export default merge(campground);

@@ -1,29 +1,7 @@
 import baseDefs from "./baseDefs";
 import { gql } from "apollo-server-express";
 
-const typeDefs = gql`
-  type User {
-    firstName: String!
-    lastName: String!
-    username: String!
-    password: String!
-  }
+// Type Defs
+import campgroundDefs from "./campground";
 
-  input CreateUserInput {
-    firstName: String!
-    lastName: String!
-    username: String!
-    password: String!
-  }
-
-  extend type Query {
-    users: [User!]
-    user(id: ID!): User!
-  }
-
-  extend type Mutation {
-    createUser(input: CreateUserInput): User!
-  }
-`;
-
-export default [typeDefs, baseDefs];
+export default [baseDefs, campgroundDefs];
