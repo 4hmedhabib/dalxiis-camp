@@ -11,6 +11,7 @@ const appGetStart = async () => {
 
   // middlewares
   app.use(express.json());
+  app.use(express.urlencoded({ extended: true }));
   app.disable("x-powered-by");
 
   // http server

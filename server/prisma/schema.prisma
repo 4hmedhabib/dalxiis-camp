@@ -9,3 +9,21 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Campground {
+  id       Int       @id @default(autoincrement())
+  title    String
+  location String
+  geometry Geometry? @relation("campgroundToGeometry")
+}
+
+model Geometry {
+  id           Int          @id @default(autoincrement())
+  campground   Campground   @relation("campgroundToGeometry", fields: [campgroundId], references: [id])
+  campgroundId Int          @unique
+  type         GeometryType
+}
+
+enum GeometryType {
+  Point
+}
