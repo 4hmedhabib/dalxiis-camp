@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import Logo from "./Logo/Logo/Logo";
+import Logo from "./Logo/Logo";
 
 type Props = {};
 
