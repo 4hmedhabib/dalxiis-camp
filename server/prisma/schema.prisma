@@ -10,11 +10,33 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id          Int          @id @default(autoincrement())
+  username    String       @unique
+  firstName   String
+  lastName    String
+  password    String
+  // campgrounds
+  campgrounds Campground[] @relation("UserToCampground")
+  // reviews
+  reviews     Review[]     @relation("UserToReview")
+}
+
 model Campground {
-  id       Int       @id @default(autoincrement())
-  title    String
-  location String
-  geometry Geometry? @relation("campgroundToGeometry")
+  id          Int                 @id @default(autoincrement())
+  title       String
+  location    String
+  // geometry
+  geometry    Geometry?           @relation("campgroundToGeometry")
+  // user
+  user        User?               @relation("UserToCampground", fields: [userId], references: [id])
+  userId      Int?
+  // images
+  images      Campground_Images[] @relation("CampgroundToImage")
+  description String
+  price       Int
+  // reviews
+  reviews     Review[]            @relation("CampgroundToReview")
 }
 
 model Geometry {
@@ -22,6 +44,27 @@ model Geometry {
   campground   Campground   @relation("campgroundToGeometry", fields: [campgroundId], references: [id])
   campgroundId Int          @unique
   type         GeometryType
+}
+
+model Campground_Images {
+  id           Int         @id @default(autoincrement())
+  url          String
+  filename     String
+  // campground
+  campground   Campground? @relation("CampgroundToImage", fields: [campgroundId], references: [id])
+  campgroundId Int?
+}
+
+model Review {
+  id           Int         @id @default(autoincrement())
+  rating       Int
+  body         String
+  // campground
+  campground   Campground? @relation("CampgroundToReview", fields: [campgroundId], references: [id])
+  campgroundId Int?
+  // author
+  author       User?       @relation("UserToReview", fields: [authorId], references: [id])
+  authorId     Int?
 }
 
 enum GeometryType {
