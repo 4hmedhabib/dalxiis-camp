@@ -1,11 +1,11 @@
 interface City {
-  city: String;
-  growth_from_2000_to_2013: String;
-  latitude: Number;
-  longitude: Number;
-  population: String;
-  rank: String;
-  state: String;
+  city: string;
+  growth_from_2000_to_2013: string;
+  latitude: number;
+  longitude: number;
+  population: string;
+  rank: string;
+  state: string;
 }
 
 const cities: City[] = [

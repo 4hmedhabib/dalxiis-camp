@@ -1,4 +1,4 @@
-const descriptors: String[] = [
+const descriptors: string[] = [
   "Forest",
   "Ancient",
   "Petrified",
@@ -19,7 +19,7 @@ const descriptors: String[] = [
   "Diamond",
 ];
 
-const places: String[] = [
+const places: string[] = [
   "Flats",
   "Village",
   "Canyon",
