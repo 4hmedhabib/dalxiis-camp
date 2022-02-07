@@ -7,7 +7,7 @@ const Campground = (props: Props) => {
     return str.length > 90 ? `${str.substring(0, 87)} ...` : str;
   };
   return (
-    <div className="w-full max-w-sm my-3 shadow shadow-gray-100 p-2 rounded-lg">
+    <div className="w-full max-w-md md:max-w-sm lg:max-w-xs my-3 shadow shadow-gray-100 p-2 rounded-lg">
       <div id="image">
         <img
           src="https://images.unsplash.com/photo-1508873696983-2dfd5898f08b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
