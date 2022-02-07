@@ -1,12 +1,14 @@
 import React from "react";
 
-type Props = {};
+type Props = {
+  isToggle: boolean;
+};
 
-const Logo = (props: Props) => {
+const Logo = ({ isToggle }: Props) => {
   return (
     <div
       id="logo"
-      className="flex px-8 justify-start items-center gap-2 font-nunito"
+      className="flex w-full md:w-auto mx-3 md:mx-0  px-8 justify-start items-center gap-2 font-nunito "
     >
       <div id="image" className="w-16">
         <img src="/logo.png" alt="dalxiis camp logo" />
