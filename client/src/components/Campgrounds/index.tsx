@@ -1,10 +1,18 @@
-import { Hidden } from "@mui/material";
-import React from "react";
+import React, { FC, useEffect, useState } from "react";
 import Campground from "./Campground";
+import { useQuery } from "@apollo/client";
+import { CAMPGROUNDS } from "../../graphql/Queries/campground";
 
 type Props = {};
 
-const Campgrounds = (props: Props) => {
+const Campgrounds: FC = (props: Props): JSX.Element => {
+  const [campgrounds, setCampgrounds] = useState([]);
+
+  const { data, refetch, error, loading } = useQuery(CAMPGROUNDS);
+  console.log(data);
+
+  useEffect(() => {}, []);
+
   return (
     <section id="campgrounds" className="mx-6 my-8 font-nunito">
       <div>
@@ -17,14 +25,6 @@ const Campgrounds = (props: Props) => {
         id="campground-lists"
         className="mt-6 flex flex-wrap gap-3 justify-center"
       >
-        <Campground />
-        <Campground />
-        <Campground />
-        <Campground />
-        <Campground />
-        <Campground />
-        <Campground />
-        <Campground />
         <Campground />
       </div>
     </section>
