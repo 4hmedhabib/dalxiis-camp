@@ -1,9 +1,16 @@
-import React, { FC } from "react";
+import React, { FC, ReactNode } from "react";
+import classes from "./style.module.css";
 
-type Props = {};
+type Props = {
+  children?: ReactNode;
+};
 
-const Overlay: FC = (props: Props): JSX.Element => {
-  return <div></div>;
+const Overlay: FC = ({ children }: Props): JSX.Element => {
+  return (
+    <div id="overlay" className={`${classes.modal} ${classes.content}`}>
+      {children}
+    </div>
+  );
 };
 
 export default Overlay;

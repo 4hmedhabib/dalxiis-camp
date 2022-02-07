@@ -1,0 +1,18 @@
+.modal {
+  @apply fixed w-10/12 max-w-5xl bg-white z-50 top-24 left-0 right-0 mx-auto shadow-xl shadow-black/25 rounded-md p-8;
+}
+
+.content {
+  animation: slite-down 300ms ease-out forwards;
+}
+
+@keyframes slite-dwon {
+  from {
+    opacity: 0;
+    transform: translateY(-3rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

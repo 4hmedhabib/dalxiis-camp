@@ -4,14 +4,15 @@ import BackDrop from "./BackDrop";
 import Overlay from "./Overlay";
 
 type Props = {
-  children?: ReactNode;
+  children: ReactNode;
+  closeModalHandler: () => void;
 };
 
-const Modal: FC = ({ children }: Props): JSX.Element => {
+const Modal = ({ children, closeModalHandler }: Props): JSX.Element => {
   return (
     <Fragment>
       {createPortal(
-        <BackDrop />,
+        <BackDrop closeModalHandler={closeModalHandler} />,
         document.getElementById("overlays") as HTMLElement
       )}
       {createPortal(
