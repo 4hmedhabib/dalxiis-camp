@@ -3,7 +3,7 @@ import HomeComponent from "../../components/Home";
 
 type Props = {};
 
-const Home: FC = (props: Props): JSX.Element => {
+const Home = (props: Props): JSX.Element => {
   return (
     <div>
       <HomeComponent />

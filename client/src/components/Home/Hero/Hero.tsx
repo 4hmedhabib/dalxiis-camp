@@ -1,9 +1,11 @@
 import React from "react";
 import Detail from "./Detail";
 
-type Props = {};
+type Props = {
+  showModalHandler: () => void;
+};
 
-const Hero = (props: Props) => {
+const Hero = ({ showModalHandler }: Props) => {
   return (
     <section
       id="hero-section"
@@ -16,7 +18,7 @@ const Hero = (props: Props) => {
         className="h-full w-full object-cover "
       />
       <div className="bg-gray-900 lg:bg-gray-800  absolute top-0 bottom-0 right-0 left-0 opacity-50"></div>
-      <Detail />
+      <Detail showModalHandler={showModalHandler} />
     </section>
   );
 };
