@@ -1,13 +1,23 @@
-import React, { FC, Fragment } from "react";
+import React, { FC, Fragment, ReactNode } from "react";
 import { createPortal } from "react-dom";
+import BackDrop from "./BackDrop";
+import Overlay from "./Overlay";
 
-type Props = {};
+type Props = {
+  children?: ReactNode;
+};
 
-const Modal: FC = (props: Props): JSX.Element => {
+const Modal: FC = ({ children }: Props): JSX.Element => {
   return (
     <Fragment>
-      {createPortal}
-      {createPortal}
+      {createPortal(
+        <BackDrop />,
+        document.getElementById("overlays") as HTMLElement
+      )}
+      {createPortal(
+        <Overlay>{children}</Overlay>,
+        document.getElementById("overlays") as HTMLElement
+      )}
     </Fragment>
   );
 };
