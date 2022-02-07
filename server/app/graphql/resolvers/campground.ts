@@ -37,7 +37,10 @@ const campgroundRes = {
     },
   },
   Mutation: {
-    createCampground: async (_: any, { CampgroundInput }: any) => {
+    createCampground: async (
+      _: any,
+      { CampgroundInput }: CampgroundDataInput
+    ) => {
       const args = CampgroundInput;
       console.log("Running Create Campground...", ...args.images);
       console.log(args);
