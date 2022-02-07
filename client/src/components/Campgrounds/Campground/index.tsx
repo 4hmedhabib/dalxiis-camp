@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 type Props = {
   campground: {
@@ -34,10 +35,11 @@ const Campground = ({ campground }: Props) => {
   const truncate = (str: String) => {
     return str.length > 70 ? `${str.substring(0, 70)} ...` : str;
   };
-
-  console.log(campground);
   return (
-    <div className="w-full max-w-md md:max-w-sm lg:max-w-xs my-3 shadow shadow-gray-100 p-2 rounded-lg cursor-pointer hover:shadow-2xl  hover:shadow-gray-100">
+    <Link
+      to={"/camp/" + campground.id}
+      className="w-full max-w-md md:max-w-sm lg:max-w-xs my-3 shadow shadow-gray-100 p-2 rounded-lg cursor-pointer hover:shadow-2xl  hover:shadow-gray-100"
+    >
       <div id="image">
         <img
           src={campground.images[0].url}
@@ -85,7 +87,7 @@ const Campground = ({ campground }: Props) => {
           </span>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

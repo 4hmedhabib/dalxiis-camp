@@ -1,4 +1,5 @@
 import { gql } from "apollo-server-express";
+
 const campgroundDefs = gql`
   type Campground {
     id: ID!
@@ -13,8 +14,17 @@ const campgroundDefs = gql`
     reviews: [Review!]
   }
 
+  input CampgroundInput{
+    
+    }
+
   extend type Query {
     campgrounds: [Campground!]
+    campground(id: ID!) : Campground!
+  }
+
+  extend type Mutation {
+    createCampground(CampgroundInput: CampgroundInput): Campground!
   }
 `;
 
