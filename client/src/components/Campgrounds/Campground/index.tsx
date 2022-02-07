@@ -36,7 +36,7 @@ const Campground = (props: Props) => {
       </div>
       <div
         id="user-profile"
-        className="w-full max-w-fit flex gap-3 items-center justify-start mt-8"
+        className="w-full flex gap-3 items-center justify-start mt-8  mb-4 p-2 rounded-lg bg-gray-50 shadow shadow-gray-100 max-w-sm"
       >
         <div id="user-image" className="w-8 h-8 rounded-full">
           <img

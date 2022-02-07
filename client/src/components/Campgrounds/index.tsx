@@ -13,7 +13,18 @@ const Campgrounds = (props: Props) => {
         </h1>
         <hr />
       </div>
-      <div id="campground-lists">
+      <div
+        id="campground-lists"
+        className="mt-6 flex flex-wrap gap-3 justify-center"
+      >
+        <Campground />
+        <Campground />
+        <Campground />
+        <Campground />
+        <Campground />
+        <Campground />
+        <Campground />
+        <Campground />
         <Campground />
       </div>
     </section>
