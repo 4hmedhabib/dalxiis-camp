@@ -3,6 +3,7 @@ import HeroSection from "./Hero/Hero";
 import Campgrounds from "../Campgrounds";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { Modal } from "../UI";
+import { NewCampground } from "../";
 
 type Props = {};
 
@@ -31,7 +32,11 @@ const Home = (props: Props): JSX.Element => {
         />
         <Route
           path="/camp/new"
-          element={<Modal closeModalHandler={closeModalHandler}>hello</Modal>}
+          element={
+            <Modal closeModalHandler={closeModalHandler}>
+              <NewCampground />
+            </Modal>
+          }
         />
       </Routes>
     </Fragment>
