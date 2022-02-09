@@ -1,9 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
-import dotenv from "dotenv";
+
+// CSS
+import "./index.css";
+import "filepond/dist/filepond.min.css";
 
 // graphql setup
 import {

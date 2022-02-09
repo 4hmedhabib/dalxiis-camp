@@ -2,6 +2,25 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
+type CampgroundDataInput = {
+  CampgroundInput: {
+    title: string;
+    location: string;
+    authorId: number;
+    images: [
+      {
+        url: string;
+      }
+    ];
+    geometry: {
+      lat: number;
+      lng: number;
+    };
+    description: string;
+    price: number;
+  };
+};
+
 const campgroundRes = {
   Query: {
     campgrounds: async (_: any, {}) => {
@@ -14,8 +33,40 @@ const campgroundRes = {
         },
       });
 
-      console.log(campgrounds);
       return campgrounds;
+    },
+  },
+  Mutation: {
+    createCampground: async (
+      _: any,
+      { CampgroundInput }: CampgroundDataInput
+    ) => {
+      const args = CampgroundInput;
+      console.log("Running Create Campground...", ...args.images);
+      console.log(args);
+      const campground = await prisma.campground.create({
+        include: { images: true, geometry: true },
+        data: {
+          title: `${args.title}`,
+          description: `${args.description}`,
+          price: args.price,
+          geometry: {
+            create: {
+              lat: args.geometry.lat,
+              lng: args.geometry.lng,
+              type: "Point",
+            },
+          },
+          images: {
+            createMany: {
+              data: [...args.images],
+            },
+          },
+          authorId: args.authorId,
+          location: `${args.location}`,
+        },
+      });
+      return campground;
     },
   },
 };

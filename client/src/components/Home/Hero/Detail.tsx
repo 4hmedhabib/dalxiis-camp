@@ -1,8 +1,12 @@
 import React from "react";
+import { Routes, Route, useNavigate } from "react-router-dom";
+import { Modal } from "../../UI";
 
-type Props = {};
+type Props = {
+  showModalHandler: () => void;
+};
 
-const Detail = (props: Props) => {
+const Detail = ({ showModalHandler }: Props) => {
   return (
     <div
       id="content"
@@ -20,7 +24,10 @@ const Detail = (props: Props) => {
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
           minim veniam, quis nostrud exercitation ullamco laboris{" "}
         </p>
-        <button className="transition ease-in-out delay-150 bg-yellow-500 text-white px-3 py-2 mt-8 rounded-md hover:-translate-y-1 hover:scale-110 hover:bg-yellow-400 duration-300">
+        <button
+          onClick={showModalHandler}
+          className="transition ease-in-out delay-150 bg-yellow-500 text-white px-3 py-2 mt-8 rounded-md hover:-translate-y-1 hover:scale-110 hover:bg-yellow-400 duration-300"
+        >
           Create New Campground
         </button>
       </div>

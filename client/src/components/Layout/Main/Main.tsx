@@ -4,7 +4,7 @@ type Props = {
   children?: ReactNode;
 };
 
-const Main: FC = ({ children }: Props): JSX.Element => {
+const Main = ({ children }: Props): JSX.Element => {
   return <Fragment>{children}</Fragment>;
 };
 
