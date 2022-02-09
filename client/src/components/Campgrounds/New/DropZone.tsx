@@ -1,6 +1,7 @@
 import classes from "./Form.module.css";
 import { AddImage } from "./Svg";
 import { useDropzone } from "react-dropzone";
+import { useEffect, useState } from "react";
 
 type Props = {
   formik: any;
@@ -12,7 +13,29 @@ interface File {
 }
 
 const DropZone = ({ formik }: Props) => {
-  const { acceptedFiles, getRootProps, getInputProps } = useDropzone();
+  const [images, setImages] = useState<any[]>([]);
+
+  const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
+    accept: "image/jpeg,image/png",
+    maxFiles: 2,
+    maxSize: 1e7,
+    onDrop: (acceptedFiles) => {
+      formik.setFieldValue("file_uploads", acceptedFiles);
+      setImages(
+        acceptedFiles.map((file) =>
+          Object.assign(file, {
+            preview: URL.createObjectURL(file),
+          })
+        )
+      );
+    },
+  });
+
+  useEffect(() => {
+    images.forEach((image) => {
+      return URL.revokeObjectURL(image.preview);
+    });
+  }, [images]);
 
   const files = acceptedFiles.map((file: File) => (
     <li
@@ -27,28 +50,61 @@ const DropZone = ({ formik }: Props) => {
     <div className="md:col-span-2 xl:col-span-3">
       <label className={classes.input_label}>Camp Images</label>
       <div className={classes.upload_group}>
-        <div className="space-y-2 text-center">
-          <AddImage />
-          <div className="flex flex-col sm:flex-row justify-center text-sm text-gray-600">
-            <label htmlFor="file_upload" className={classes.upload_label}>
-              <span>Upload a file</span>
-              <input
-                id="file_upload"
-                name="file_uploads"
-                type="file"
-                onChange={formik.handleChange}
-                className="sr-only"
-                {...getInputProps()}
-              />
+        {acceptedFiles.length < 1 ? (
+          <div className="space-y-2 text-center">
+            <label htmlFor="file_uploads" className="cursor-pointer">
+              <AddImage />
             </label>
-            <p className="pl-1">or drag and drop</p>
+            <div className="flex flex-col sm:flex-row justify-center text-sm text-gray-600">
+              <label htmlFor="file_uploads" className={classes.upload_label}>
+                <span>Upload a file</span>
+                <input
+                  id="file_uploads"
+                  name="file_uploads"
+                  type="file"
+                  value={formik.file_uploads}
+                  onChange={formik.handleChange}
+                  className="sr-only"
+                  {...getInputProps()}
+                />
+              </label>
+              <p className="pl-1">or drag and drop</p>
+            </div>
+            <p className="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
           </div>
-          <p className="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
-        </div>
+        ) : (
+          <div className="flex justify-center ">
+            <label
+              htmlFor="file_uploads"
+              className="bg-blue-500 text-white px-3 py-1 rounded-md cursor-pointer"
+            >
+              Change the images
+            </label>
+            <input
+              id="file_uploads"
+              name="file_uploads"
+              type="file"
+              value={formik.file_uploads}
+              onChange={formik.handleChange}
+              className="sr-only"
+              {...getInputProps()}
+            />
+          </div>
+        )}
 
-        <ul className="flex items-center justify-center gap-3 flex-wrap">
-          {files}
-        </ul>
+        <div className="flex flex-wrap gap-3">
+          {images.map((file) => (
+            <div key={file.name}>
+              <div className="w-36 h-20 bg-blue-500">
+                <img
+                  src={file.preview}
+                  alt=""
+                  className=" w-full h-full object-center object-cover"
+                />
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
