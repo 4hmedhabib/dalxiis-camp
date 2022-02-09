@@ -1,5 +1,5 @@
 .modal {
-  @apply fixed w-10/12 max-w-5xl bg-white z-50 top-24 left-0 right-0 mx-auto shadow-xl shadow-black/25 rounded-md p-8;
+  @apply fixed w-10/12 max-w-5xl bg-white z-50 top-10 md:top-24 bottom-10 left-0 right-0 mx-auto shadow-xl shadow-black/25 rounded-md p-8 overflow-y-auto max-h-screen;
 }
 
 .content {
