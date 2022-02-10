@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from "react";
 import SingleUploadFile from "./SingleUploadFile";
 import { FileError, FileRejection, useDropzone } from "react-dropzone";
+import UploadError from "./UploadError";
 
 export interface UploadableFile {
   file: File;
@@ -31,7 +32,10 @@ const DropZone2 = () => {
     setFiles((curr) => [...curr, ...mappedAcc, ...rejFiles]);
   }, []);
 
-  const { getRootProps, getInputProps } = useDropzone({ onDrop });
+  const { getRootProps, getInputProps } = useDropzone({
+    onDrop,
+    accept: "video/*",
+  });
 
   return (
     <div>
@@ -39,15 +43,23 @@ const DropZone2 = () => {
       <p {...getRootProps()}>
         Drag 'n' drop some files here, or click to select files
       </p>
-      {files.map((fileWrapper, i) => (
-        <SingleUploadFile
-          onDelete={deletFile}
-          onUpload={uploadFile}
-          file={fileWrapper.file}
-          key={i}
-        />
-      ))}
-      {JSON.stringify(files)}
+
+      {files.map((fileWrapper, i) =>
+        fileWrapper.errors.length ? (
+          <UploadError
+            errors={fileWrapper.errors}
+            file={fileWrapper.file}
+            onDelete={deletFile}
+          />
+        ) : (
+          <SingleUploadFile
+            onDelete={deletFile}
+            onUpload={uploadFile}
+            file={fileWrapper.file}
+            key={i}
+          />
+        )
+      )}
     </div>
   );
 };

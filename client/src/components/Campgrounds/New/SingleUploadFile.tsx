@@ -16,7 +16,7 @@ const SingleUploadFile = ({
   const [progress, setProgress] = useState(0);
 
   const uploadFile = (file: File, onProgress: (percentage: number) => void) => {
-    const url = "https://api.claoudinary.com/v1_1/sosloper/image/upload";
+    const url = "https://api.cloudinary.com/v1_1/sosloper/image/upload";
 
     return new Promise<string>((res, rej) => {
       const xhr = new XMLHttpRequest();
@@ -85,7 +85,7 @@ const SingleUploadFile = ({
           />
           <span className="absolute text-xs">{progress}%</span>
         </div>
-        SingleUploadFile
+        <span className=" truncate">{file.name}</span>
       </div>
       <XIcon
         className="w-5 h-5 text-red-500 mr-8 cursor-pointer"
