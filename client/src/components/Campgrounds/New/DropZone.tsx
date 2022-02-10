@@ -1,4 +1,4 @@
-import classes from "./Form.module.css";
+mport classes from "./Form.module.css";
 import { AddImage } from "./Svg";
 import { useDropzone } from "react-dropzone";
 import { useEffect, useState } from "react";
@@ -14,13 +14,13 @@ interface File {
 
 const DropZone = ({ formik }: Props) => {
   const [images, setImages] = useState<any[]>([]);
+  const [oldImages, setOldImages] = useState<any[]>([])
 
   const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
     accept: "image/jpeg,image/png",
-    maxFiles: 2,
-    maxSize: 1e7,
     onDrop: (acceptedFiles) => {
       formik.setFieldValue("file_uploads", acceptedFiles);
+      setOldImages(images)
       setImages(
         acceptedFiles.map((file) =>
           Object.assign(file, {
@@ -30,6 +30,8 @@ const DropZone = ({ formik }: Props) => {
       );
     },
   });
+
+  console.log(images, '===', oldImages)
 
   useEffect(() => {
     images.forEach((image) => {

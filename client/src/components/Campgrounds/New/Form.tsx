@@ -64,8 +64,7 @@ const Form = ({ formik }: Props) => {
         </div>
       </div>
 
-      {/* <DropZone formik={formik} /> */}
-      <DropZone2 />
+      <DropZone formik={formik} />
 
       <div className={classes.input_group}>
         <label htmlFor="description" className={classes.input_label}>
