@@ -7,9 +7,9 @@ type Props = {
   formik: any;
 };
 
-interface File {
-  path?: string;
-  size?: number;
+interface Event {
+  loaded?: string;
+  total?: string;
 }
 
 const DropZone = ({ formik }: Props) => {
@@ -17,10 +17,8 @@ const DropZone = ({ formik }: Props) => {
 
   const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
     accept: "image/jpeg,image/png",
-    maxFiles: 2,
-    maxSize: 1e7,
-    onDrop: (acceptedFiles) => {
-      formik.setFieldValue("file_uploads", acceptedFiles);
+    onDrop: async (acceptedFiles) => {
+      formik.setFieldValue(acceptedFiles);
       setImages(
         acceptedFiles.map((file) =>
           Object.assign(file, {
@@ -37,20 +35,11 @@ const DropZone = ({ formik }: Props) => {
     });
   }, [images]);
 
-  const files = acceptedFiles.map((file: File) => (
-    <li
-      key={file.path}
-      className="max-w-sm shadow bg-blue-50 rounded-md px-2 py-1 text-sm"
-    >
-      {file.path} - {file.size} bytes
-    </li>
-  ));
-
   return (
     <div className="md:col-span-2 xl:col-span-3">
       <label className={classes.input_label}>Camp Images</label>
       <div className={classes.upload_group}>
-        {acceptedFiles.length < 1 ? (
+        {images.length < 1 ? (
           <div className="space-y-2 text-center">
             <label htmlFor="file_uploads" className="cursor-pointer">
               <AddImage />
@@ -85,8 +74,10 @@ const DropZone = ({ formik }: Props) => {
               name="file_uploads"
               type="file"
               value={formik.file_uploads}
-              onChange={formik.handleChange}
               className="sr-only"
+              onChange={() => {
+                formik.setFieldValue(images);
+              }}
               {...getInputProps()}
             />
           </div>
