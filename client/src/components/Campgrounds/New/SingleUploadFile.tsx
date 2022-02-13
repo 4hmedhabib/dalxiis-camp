@@ -38,11 +38,11 @@ const SingleUploadFile = ({
         }
       };
 
-      const formData = new FormData();
-      formData.append("file", file);
-      formData.append("upload_preset", "sosloper_default_preset");
+      // const formData = new FormData();
+      // formData.append("file", file);
+      // formData.append("upload_preset", "sosloper_default_preset");
 
-      xhr.send(formData);
+      // xhr.send(formData);
     });
   };
 

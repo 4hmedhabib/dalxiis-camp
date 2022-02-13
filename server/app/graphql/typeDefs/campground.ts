@@ -33,7 +33,7 @@ const campgroundDefs = gql`
     title: String
     location: String
     authorId: Int
-    images: [ImageFiles!]
+    images: [Upload!]!
     geometry: GeometryDataInput
     description: String
     price: Float

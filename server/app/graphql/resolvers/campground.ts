@@ -7,11 +7,7 @@ export interface CampgroundDataInput {
     title: string;
     location: string;
     authorId: number;
-    images: [
-      {
-        url: string;
-      }
-    ];
+    images: string | number[];
     geometry: {
       lat: number;
       lng: number;
@@ -42,7 +38,7 @@ const campgroundRes = {
       { CampgroundInput }: CampgroundDataInput
     ) => {
       const args = CampgroundInput;
-      console.log("Running Create Campground...", ...args.images);
+      console.log("Running Create Campground...", ...args.images, "END");
       console.log(args);
       // const campground = await prisma.campground.create({
       //   include: { images: true, geometry: true },

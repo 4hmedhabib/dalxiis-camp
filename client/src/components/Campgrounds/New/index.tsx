@@ -15,6 +15,7 @@ const NewCampground = (props: Props) => {
       file_uploads: [],
     },
     onSubmit: (values) => {
+      console.log("FORM VALUES : ", values);
       createCamp({
         variables: {
           campgroundInput: {
@@ -27,10 +28,12 @@ const NewCampground = (props: Props) => {
             authorId: 1,
             description: "Leading us neatly on from our last",
             price: 25,
-            images: [...values.file_uploads],
+            images: values.file_uploads,
           },
         },
       });
+
+      console.log("FORM SUBMITTED");
     },
   });
 
