@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+import { FileUpload, GraphQLUpload } from "graphql-upload";
 
 const prisma = new PrismaClient();
 
@@ -7,7 +8,7 @@ export interface CampgroundDataInput {
     title: string;
     location: string;
     authorId: number;
-    images: string | number[];
+    images: any;
     geometry: {
       lat: number;
       lng: number;
@@ -18,6 +19,7 @@ export interface CampgroundDataInput {
 }
 
 const campgroundRes = {
+  Upload: GraphQLUpload,
   Query: {
     campgrounds: async (_: any, {}) => {
       const campgrounds = await prisma.campground.findMany({
