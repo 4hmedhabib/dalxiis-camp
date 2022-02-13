@@ -14,8 +14,14 @@ const campgroundDefs = gql`
     reviews: [Review!]
   }
 
-  input ImagesInput {
-    url: String!
+  input ImageFiles {
+    path: String
+    lastModified: Int
+    lastModifiedDate: Int
+    name: String
+    size: Int
+    type: String
+    webkitRelativePath: String
   }
 
   input GeometryDataInput {
@@ -24,13 +30,13 @@ const campgroundDefs = gql`
   }
 
   input CampgroundInput {
-    title: String!
-    location: String!
-    authorId: Int!
-    images: [ImagesInput!]!
+    title: String
+    location: String
+    authorId: Int
+    images: [ImageFiles!]
     geometry: GeometryDataInput
-    description: String!
-    price: Float!
+    description: String
+    price: Float
   }
 
   extend type Query {

@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-type CampgroundDataInput = {
+export interface CampgroundDataInput {
   CampgroundInput: {
     title: string;
     location: string;
@@ -19,7 +19,7 @@ type CampgroundDataInput = {
     description: string;
     price: number;
   };
-};
+}
 
 const campgroundRes = {
   Query: {
@@ -44,29 +44,29 @@ const campgroundRes = {
       const args = CampgroundInput;
       console.log("Running Create Campground...", ...args.images);
       console.log(args);
-      const campground = await prisma.campground.create({
-        include: { images: true, geometry: true },
-        data: {
-          title: `${args.title}`,
-          description: `${args.description}`,
-          price: args.price,
-          geometry: {
-            create: {
-              lat: args.geometry.lat,
-              lng: args.geometry.lng,
-              type: "Point",
-            },
-          },
-          images: {
-            createMany: {
-              data: [...args.images],
-            },
-          },
-          authorId: args.authorId,
-          location: `${args.location}`,
-        },
-      });
-      return campground;
+      // const campground = await prisma.campground.create({
+      //   include: { images: true, geometry: true },
+      //   data: {
+      //     title: `${args.title}`,
+      //     description: `${args.description}`,
+      //     price: args.price,
+      //     geometry: {
+      //       create: {
+      //         lat: args.geometry.lat,
+      //         lng: args.geometry.lng,
+      //         type: "Point",
+      //       },
+      //     },
+      //     images: {
+      //       createMany: {
+      //         data: [...args.images],
+      //       },
+      //     },
+      //     authorId: args.authorId,
+      //     location: `${args.location}`,
+      //   },
+      // });
+      // return campground;
     },
   },
 };

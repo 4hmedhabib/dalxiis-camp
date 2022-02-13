@@ -28,13 +28,15 @@ const DropZone2 = () => {
   };
 
   const onDrop = useCallback((accFiles: File[], rejFiles: FileRejection[]) => {
+    console.log(accFiles);
+    console.table(accFiles);
     const mappedAcc = accFiles.map((file) => ({ file, errors: [] }));
     setFiles((curr) => [...curr, ...mappedAcc, ...rejFiles]);
   }, []);
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
-    accept: "video/*",
+    accept: "image/*",
   });
 
   return (
