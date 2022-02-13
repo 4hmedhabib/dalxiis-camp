@@ -20,6 +20,8 @@ model User {
   campgrounds Campground[] @relation("UserToCampground")
   // reviews
   reviews     Review[]     @relation("UserToReview")
+  created_at  DateTime     @default(now())
+  updated_at  DateTime     @updatedAt
 }
 
 model Campground {
@@ -37,6 +39,8 @@ model Campground {
   price       Int
   // reviews
   reviews     Review[]            @relation("CampgroundToReview")
+  created_at  DateTime            @default(now())
+  updated_at  DateTime            @updatedAt
 }
 
 model Geometry {
@@ -55,6 +59,8 @@ model Campground_Images {
   // campground
   campground   Campground? @relation("CampgroundToImage", fields: [campgroundId], references: [id])
   campgroundId Int?
+  created_At   DateTime    @default(now())
+  updated_At   DateTime    @updatedAt
 }
 
 model Review {
@@ -67,6 +73,8 @@ model Review {
   // author
   author       User?       @relation("UserToReview", fields: [authorId], references: [id])
   authorId     Int?
+  created_At   DateTime    @default(now())
+  updated_At   DateTime    @updatedAt
 }
 
 enum GeometryType {

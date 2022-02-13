@@ -6,7 +6,7 @@ const Logo = (props: Props) => {
   return (
     <div
       id="logo"
-      className="flex px-8 justify-start items-center gap-2 font-nunito"
+      className="flex w-full lg:w-auto mx-3 lg:mx-0  px-8 justify-start items-center gap-2 font-nunito transition-all"
     >
       <div id="image" className="w-16">
         <img src="/logo.png" alt="dalxiis camp logo" />
