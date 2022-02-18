@@ -1,4 +1,5 @@
 import { gql } from "apollo-server-express";
+const { GraphQLUpload } = require("graphql-upload");
 
 const campgroundDefs = gql`
   type Campground {
@@ -14,8 +15,20 @@ const campgroundDefs = gql`
     reviews: [Review!]
   }
 
-  input ImagesInput {
-    url: String!
+  input ImageFile {
+    filename: String!
+    mimetype: String!
+    encoding: String!
+  }
+
+  input ImageFiles {
+    path: String
+    lastModified: Int
+    lastModifiedDate: Int
+    name: String
+    size: Int
+    type: String
+    webkitRelativePath: String
   }
 
   input GeometryDataInput {
@@ -24,13 +37,13 @@ const campgroundDefs = gql`
   }
 
   input CampgroundInput {
-    title: String!
-    location: String!
-    authorId: Int!
-    images: [ImagesInput!]!
+    title: String
+    location: String
+    authorId: Int
+    images: [ImageFile!]!
     geometry: GeometryDataInput
-    description: String!
-    price: Float!
+    description: String
+    price: Float
   }
 
   extend type Query {
