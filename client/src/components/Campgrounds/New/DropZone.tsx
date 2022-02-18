@@ -18,7 +18,7 @@ const DropZone = ({ formik }: Props) => {
   const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
     accept: "image/jpeg,image/png",
     onDrop: async (acceptedFiles) => {
-      formik.setFieldValue(acceptedFiles);
+      formik.setFieldValue("", acceptedFiles);
       setImages(
         acceptedFiles.map((file) =>
           Object.assign(file, {

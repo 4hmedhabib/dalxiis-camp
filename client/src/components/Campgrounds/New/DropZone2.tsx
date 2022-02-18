@@ -2,13 +2,18 @@ import React, { useState, useCallback } from "react";
 import SingleUploadFile from "./SingleUploadFile";
 import { FileError, FileRejection, useDropzone } from "react-dropzone";
 import UploadError from "./UploadError";
+import { FormikValues } from "formik";
 
 export interface UploadableFile {
   file: File;
   errors: FileError[];
 }
 
-const DropZone2 = () => {
+export interface DropZoneProps {
+  formik: FormikValues;
+}
+
+const DropZone2 = ({ formik }: DropZoneProps) => {
   const [files, setFiles] = useState<UploadableFile[]>([]);
 
   const uploadFile = (file: File, url: string) => {
@@ -28,13 +33,14 @@ const DropZone2 = () => {
   };
 
   const onDrop = useCallback((accFiles: File[], rejFiles: FileRejection[]) => {
+    formik.setFieldValue("file_uploads", accFiles);
     const mappedAcc = accFiles.map((file) => ({ file, errors: [] }));
     setFiles((curr) => [...curr, ...mappedAcc, ...rejFiles]);
   }, []);
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
-    accept: "video/*",
+    accept: "image/*",
   });
 
   return (
